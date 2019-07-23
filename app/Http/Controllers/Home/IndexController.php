@@ -62,6 +62,7 @@ class IndexController extends FatherController
         }else{
             Db::table('access')->insert($user_ip);
         }
+        print_r($info);die;
         return view('home.index.Index',['data'=>$info,'infos'=>$info,'http'=>$http,'selfWebInfo'=>$selfWebInfo]);
     }
     /*
