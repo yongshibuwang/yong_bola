@@ -26,7 +26,6 @@ class IndexController extends FatherController
         }else{
             $user_ip['ip']="127.0.0.1";
         }
-
         $user_ip['access_time']=time();
         $user_ip['access_date']=date('Ymd',time());
         $user_ip['access_web']="常用网站";
@@ -43,7 +42,6 @@ class IndexController extends FatherController
 
         request()->flash();
         $info=DB::table('web')->where('status',1)->orderBy('add_time','desc')->paginate(60);
-        $data_info=$info->toArray();
         //获取协议
         $http=$request->server()['REQUEST_SCHEME'];
         //获取网站信息
@@ -64,7 +62,7 @@ class IndexController extends FatherController
         }else{
             Db::table('access')->insert($user_ip);
         }
-        return view('home.index.Index',['data'=>$data_info['data'],'infos'=>$info,'http'=>$http,'selfWebInfo'=>$selfWebInfo]);
+        return view('home.index.Index',['data'=>$info,'infos'=>$info,'http'=>$http,'selfWebInfo'=>$selfWebInfo]);
     }
     /*
      * 测试Vue

@@ -97,11 +97,10 @@
 </header>
 <div class="container" style="text-align: center;">
     <div class="row" style="text-align: center;">
-        @foreach($data as $info)
+        @foreach ($data as $info)
             <div class="col-md-3 col-sm-6 col-xs-14 show" style="position:relative;height: 190px;padding: 10px 16px;">
                 <a href="{{$info->web_address}}" target="_blank" style="width: 100%;text-align: center;">
                     <img  src="{{$info->img}}" alt="" style="text-align: center;padding: 10px 16px;height: 160px;width: 100%;transform: translate(0, 0);border: 1px solid #f0ad4e;">
-
                 </a>
                 <div style="text-align: center;width: 100%;">{{$info->name}}</div>
                 <div class="f_show" style="border: 1px solid #f5f5f5">
