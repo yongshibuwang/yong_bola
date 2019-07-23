@@ -26,16 +26,24 @@ class IndexController extends FatherController
         }else{
             $user_ip['ip']="127.0.0.1";
         }
+
         $user_ip['access_time']=time();
         $user_ip['access_date']=date('Ymd',time());
         $user_ip['access_web']="常用网站";
+
         if($id1=Db::table('access')->where('ip',$user_ip['ip'])->orderBy('access_time','desc')->get()){
-            if(date('Ymd',$id1[0]->access_time)==date('Ymd',time())){
+	  if($id1->toArray()){
+	     if(date('Ymd',$id1[0]->access_time)==date('Ymd',time())){
                 Db::table('access')->where('id','=',$id1[0]->id)->increment('access_num');
                 Db::table('access')->where('id','=',$id1[0]->id)->update(['access_time'=>time(),"access_web"=>"常用网站"]);
-            }else{
+             }else{
                 Db::table('access')->insert($user_ip);
-            }
+             }
+
+	  }else{
+                Db::table('access')->insert($user_ip);
+           }
+            
         }else{
             Db::table('access')->insert($user_ip);
         }
@@ -62,7 +70,6 @@ class IndexController extends FatherController
         }else{
             Db::table('access')->insert($user_ip);
         }
-        print_r($info);die;
         return view('home.index.Index',['data'=>$info,'infos'=>$info,'http'=>$http,'selfWebInfo'=>$selfWebInfo]);
     }
     /*
